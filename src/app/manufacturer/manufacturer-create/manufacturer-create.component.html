@@ -1,0 +1,33 @@
+ <form [formGroup]="manufacturerForm" novalidate class="form-container"  (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <input matInput placeholder="name" formControlName="name">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input type="date" matInput placeholder="foundTime" formControlName="foundTime">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput placeholder="founder" formControlName="founder">
+  </mat-form-field>
+
+  <mat-form-field>
+      <input matInput placeholder="nationality" formControlName="nationality">
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="slogan" formControlName="slogan">
+  </mat-form-field>
+
+  <app-image-selector></app-image-selector>
+
+   <app-name-value [nameValuePairs]="websites"></app-name-value>
+
+  <mat-form-field>
+    <textarea matInput placeholder="legend" formControlName="legend"></textarea>
+  </mat-form-field>
+
+  <button type="submit" mat-raised-button color="primary">Primary</button>
+  </form>
+
+  <p>Form value: {{ manufacturerForm.value | json }}</p>
+  <p>Form status: {{ manufacturerForm.status | json }}</p>

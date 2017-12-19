@@ -15,6 +15,10 @@
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts"
+    "**/*.d.ts",
+    "../node_modules/jlbfields/**/*",
+    "../node_modules/jsonapi4angular/**/*",
+    "../node_modules/data-shape-ng/**/*",
+    "../src/**/*"
   ]
 }

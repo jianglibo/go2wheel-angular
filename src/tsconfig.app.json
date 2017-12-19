@@ -8,6 +8,16 @@
   },
   "exclude": [
     "test.ts",
-    "**/*.spec.ts"
+    "**/*.spec.ts",
+    "../node_modules/jlbfields/**/*.spec.ts",
+    "../node_modules/jsonapi4angular/**/*.spec.ts",
+    "../node_modules/jlbfields/**/*.test.ts",
+    "../node_modules/jsonapi4angular/**/*.test.ts"
+  ],
+  "include": [
+    "../node_modules/jlbfields/**/*",
+    "../node_modules/jsonapi4angular/**/*",
+    "../node_modules/data-shape-ng/**/*",
+    "../src/**/*"
   ]
 }

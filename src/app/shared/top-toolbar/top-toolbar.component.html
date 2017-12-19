@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span>Go2Wheel</span>
+
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <button mat-icon-button [matMenuTriggerFor]="mmmenu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  
+  <mat-menu #mmmenu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voicemail</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
