@@ -11,8 +11,10 @@
     "**/*.spec.ts",
     "../node_modules/jlbfields/**/*.spec.ts",
     "../node_modules/jsonapi4angular/**/*.spec.ts",
+    "../node_modules/data-shape-ng/**/*.spec.ts",
     "../node_modules/jlbfields/**/*.test.ts",
-    "../node_modules/jsonapi4angular/**/*.test.ts"
+    "../node_modules/jsonapi4angular/**/*.test.ts",
+    "../node_modules/data-shape-ng/**/*.test.ts"
   ],
   "include": [
     "../node_modules/jlbfields/**/*",

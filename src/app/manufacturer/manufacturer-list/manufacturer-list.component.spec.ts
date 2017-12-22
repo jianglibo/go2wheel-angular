@@ -40,6 +40,7 @@ import { By } from '@angular/platform-browser';
 import { ManufacturerService } from '../manufacturer.service';
 import { Injectable } from '@angular/core';
 import { HttpDatastore } from 'jsonapi4angular';
+import { ManufacturerModule } from '../manufacturer.module';
 
 class HttpDatastoreServiceStub {
   findAll(
@@ -80,23 +81,16 @@ describe('ManufacturerListComponent', () => {
     async(() => {
       TestBed.configureTestingModule({
         imports: [
-          MatIconModule,
-          MatListModule,
-          MatTableModule,
-          MatCheckboxModule,
-          MatPaginatorModule,
-          MatSortModule,
-          BrowserAnimationsModule,
-          MatFormFieldModule,
-          MatInputModule,
+          ManufacturerModule,
           HttpClientTestingModule
         ],
         providers: [
           { provide: HttpDatastore, useValue: httpDatastoreServiceStub },
           { provide: ManufacturerService, useClass: ManufacturerServiceMock }
         ],
-        declarations: [ManufacturerListComponent]
-      }).compileComponents();
+        declarations: []
+      })
+      .compileComponents();
     })
   );
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { ManufacturerDatasource } from './manufacturer-datasource';
 import { Observable } from 'rxjs/Observable';
 import { Manufacturer, SingleBody, ManufacturerAttributes } from 'data-shape-ng';
@@ -7,7 +7,7 @@ import { HttpDatastore } from 'jsonapi4angular';
 @Injectable()
 export class ManufacturerService {
 
-  constructor(private _datastore: HttpDatastore) {
+  constructor(@Inject(HttpDatastore) private _datastore: HttpDatastore) {
   }
 
    getDatasource(): ManufacturerDatasource {

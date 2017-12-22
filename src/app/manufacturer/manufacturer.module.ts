@@ -16,16 +16,20 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSortModule } from '@angular/material/sort';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     ImageSelectorModule,
     MatFormFieldModule,
     MatTableModule,
     MatCheckboxModule,
     MatPaginatorModule,
+    MatSortModule,
     NameValueModule,
     MatInputModule,
     MatButtonModule,
