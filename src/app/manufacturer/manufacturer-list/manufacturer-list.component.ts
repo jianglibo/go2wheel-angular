@@ -13,6 +13,7 @@ import 'rxjs/add/operator/debounceTime';
 import { ManufacturerDatasource } from '../manufacturer-datasource';
 import { DataStore } from 'data-shape-ng';
 import { ManufacturerService } from '../manufacturer.service';
+import { ActionMenuItem } from 'jlbfields/index';
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -24,6 +25,10 @@ export class ManufacturerListComponent implements OnInit {
     // exampleDatabase = new ExampleDatabase();
     selection = new SelectionModel<String>(true, []);
     dataSource: ManufacturerDatasource | null;
+
+    get menuItems(): ActionMenuItem[] {
+      return [ActionMenuItem.getDeleteItem(), ActionMenuItem.getEditItem()];
+    }
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -42,6 +47,10 @@ export class ManufacturerListComponent implements OnInit {
             this.dataSource.filter = this.filter.nativeElement.value;
           });
       console.log('ngOnInit');
+    }
+
+    menuClicked(ai: ActionMenuItem): void {
+
     }
 
     isAllSelected(): boolean {

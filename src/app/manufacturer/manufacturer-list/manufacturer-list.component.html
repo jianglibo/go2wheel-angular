@@ -10,6 +10,10 @@
   selected
 </div>
 
+<div>
+  <app-action-menu [selectedNumber]="selection.selected.length" maxButtons="6" [hideDisabled]="false" itemSize="24" [menuItems]="menuItems" (menuClicked)="menuClicked($event)"></app-action-menu>
+</div>
+
 <div class="example-container mat-elevation-z8">
 
   <mat-table #table [dataSource]="dataSource" matSort>

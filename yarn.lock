@@ -3063,8 +3063,8 @@ jasminewd2@^2.1.0:
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
 jlbfields@^1.0.0:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.3.tgz#4a7caf40d9b2f777d8cf08e9a8615cb71410ce7a"
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.5.tgz#3174857d65b656bab3b4a9490ac4a2e4dbb56b98"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.0"

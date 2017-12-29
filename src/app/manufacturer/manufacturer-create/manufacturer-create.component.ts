@@ -3,10 +3,11 @@ import { FormControl, FormGroup, FormBuilder, FormArray, Validators } from '@ang
 import { Manufacturer, Medium, ManufacturerAttributes } from 'data-shape-ng';
 import { MatChipInputEvent } from '@angular/material';
 import { ManufacturerService } from '../manufacturer.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NameValuePair, DtoUtil, toDateInputValue } from 'jsonapi4angular';
 import { ImageSelectorComponent } from 'jlbfields';
 import { NameValueComponent } from 'jlbfields';
+import { ManufacturerModule } from '../manufacturer.module';
 
 
 @Component({
@@ -14,10 +15,10 @@ import { NameValueComponent } from 'jlbfields';
   templateUrl: './manufacturer-create.component.html',
   styleUrls: ['./manufacturer-create.component.css']
 })
-export class ManufacturerCreateComponent implements OnInit, OnChanges {
+export class ManufacturerCreateComponent implements OnInit {
   manufacturerForm: FormGroup;
 
-  @Input() manufacturer: Manufacturer;
+  manufacturer: Manufacturer;
 
   @ViewChild(ImageSelectorComponent)
   imageSelector: ImageSelectorComponent;
@@ -34,26 +35,43 @@ export class ManufacturerCreateComponent implements OnInit, OnChanges {
     this.manufacturer = new Manufacturer(new ManufacturerAttributes());
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (this.manufacturer) {
-      const mo = DtoUtil.cloneAttributes(this.manufacturer.attributes);
-      const wspairs: NameValuePair[] = [];
-      const wss = this.manufacturer.attributes.websites || {};
-      for (const key in wss) {
-        if (wss.hasOwnProperty(key)) {
-          const element = wss[key];
-          wspairs.push({name: key, value: element});
-        }
+  ngOnInit() {
+    console.log('abc');
+    this.route.paramMap.subscribe(params => {
+      if (params.has('id')) {
+        this.manufacturerService.datastore.findRecord(Manufacturer, params.get('id')).subscribe(
+          sb => {
+            console.log(this);
+            this.manufacturer = sb.data;
+            if (this.manufacturer) {
+              const mo = DtoUtil.cloneAttributes(this.manufacturer.attributes);
+              const wspairs: NameValuePair[] = [];
+              const wss = this.manufacturer.attributes.websites || {};
+              for (const key in wss) {
+                if (wss.hasOwnProperty(key)) {
+                  const element = wss[key];
+                  wspairs.push({name: key, value: element});
+                }
+              }
+              const d: Date = new Date(this.manufacturer.attributes.foundTime as number);
+              mo.foundTime = toDateInputValue(d);
+              delete mo.websites;
+              this.manufacturerForm.reset(mo);
+              this.imageSelector.imgUrl = mo.logo;
+              this.setWebsites(this.manufacturer.attributes.websites);
+            }
+          }
+        );
       }
-      const d: Date = new Date(this.manufacturer.attributes.foundTime as number);
-      mo.foundTime = toDateInputValue(d);
-      delete mo.websites;
-      this.manufacturerForm.reset(mo);
-      // this.setWebsites(wspairs);
-      this.imageSelector.imgUrl = mo.logo;
-      this.setWebsites(this.manufacturer.attributes.websites);
-    }
+    });
   }
+  /*
+   * when out side data changed, will this method be trigged.
+   */
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   console.log('abc1');
+  // }
 
   setWebsites(m: {[key: string]: string}): void {
     const nameValuePairs = [];
@@ -116,6 +134,4 @@ export class ManufacturerCreateComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnInit() {
-  }
 }

@@ -9,7 +9,7 @@ import { ManufacturerService } from './manufacturer.service';
 import { ManufacturerCreateComponent } from './manufacturer-create/manufacturer-create.component';
 import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ImageSelectorModule, NameValueModule } from 'jlbfields';
+import { ImageSelectorModule, NameValueModule, ActionMenuModule } from 'jlbfields';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -33,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NameValueModule,
     MatInputModule,
     MatButtonModule,
+    ActionMenuModule,
     ManufacturerRoutingModule
   ],
   declarations: [

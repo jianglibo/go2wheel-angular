@@ -7,18 +7,19 @@ import { HttpDatastore } from 'jsonapi4angular';
 @Injectable()
 export class ManufacturerService {
 
-  constructor(@Inject(HttpDatastore) private _datastore: HttpDatastore) {
+  constructor(@Inject(HttpDatastore) public datastore: HttpDatastore) {
   }
 
    getDatasource(): ManufacturerDatasource {
-     return new ManufacturerDatasource(this._datastore);
+     return new ManufacturerDatasource(this.datastore);
    }
+
 
    save(manufacturer: Manufacturer): Observable<SingleBody<ManufacturerAttributes, Manufacturer>> {
      if (manufacturer.id) {
-      return this._datastore.saveRecord(manufacturer);
+      return this.datastore.saveRecord(manufacturer);
      } else {
-       return this._datastore.createRecord(Manufacturer, manufacturer);
+       return this.datastore.createRecord(Manufacturer, manufacturer);
      }
    }
 }

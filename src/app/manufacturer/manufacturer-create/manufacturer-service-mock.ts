@@ -6,9 +6,10 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class ManufacturerServiceMock {
-  constructor(private _datastore: HttpDatastore) {}
+  constructor(public datastore: HttpDatastore) {}
+
   getDatasource(): ManufacturerDatasource {
-    const mfds = new ManufacturerDatasource(this._datastore);
+    const mfds = new ManufacturerDatasource(this.datastore);
     mfds.resultsLength = 12;
     return mfds;
   }
