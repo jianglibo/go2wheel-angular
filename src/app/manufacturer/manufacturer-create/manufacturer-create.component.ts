@@ -118,7 +118,7 @@ export class ManufacturerCreateComponent implements OnInit {
     }, err => {
       console.log(err);
     });
-    this.ngOnChanges(null);
+    // this.ngOnChanges(null);
   }
 
   createForm(): any {
