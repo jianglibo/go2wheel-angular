@@ -1,9 +1,9 @@
-import {Component, OnInit, ElementRef, ViewChild} from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {MatPaginator, MatSort} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {Observable} from 'rxjs/Observable';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
+import { MatPaginator, MatSort } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/observable/merge';
 import 'rxjs/add/observable/fromEvent';
@@ -14,6 +14,7 @@ import { ManufacturerDatasource } from '../manufacturer-datasource';
 import { DataStore } from 'data-shape-ng';
 import { ManufacturerService } from '../manufacturer.service';
 import { ActionMenuItem } from 'jlbfields/index';
+import { NameValueComponent } from 'jlbfields';
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -21,184 +22,191 @@ import { ActionMenuItem } from 'jlbfields/index';
   styleUrls: ['./manufacturer-list.component.css']
 })
 export class ManufacturerListComponent implements OnInit {
-    displayedColumns = ['select', 'id', 'name', 'nationality', 'logo'];
-    // exampleDatabase = new ExampleDatabase();
-    selection = new SelectionModel<String>(true, []);
-    dataSource: ManufacturerDatasource | null;
+  displayedColumns = ['select', 'id', 'name', 'nationality', 'logo'];
+  // exampleDatabase = new ExampleDatabase();
+  selection = new SelectionModel<String>(true, []);
+  dataSource: ManufacturerDatasource | null;
 
-    get menuItems(): ActionMenuItem[] {
-      return [ActionMenuItem.getDeleteItem(), ActionMenuItem.getEditItem()];
-    }
-
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-    @ViewChild('filter') filter: ElementRef;
-
-    constructor(private _manufactoryService: ManufacturerService) {
-    }
-
-    ngOnInit() {
-      this.dataSource = this._manufactoryService.getDatasource().initDatasource(this.paginator, this.sort);
-      Observable.fromEvent(this.filter.nativeElement, 'keyup')
-          .debounceTime(150)
-          .distinctUntilChanged()
-          .subscribe(() => {
-            if (!this.dataSource) { return; }
-            this.dataSource.filter = this.filter.nativeElement.value;
-          });
-      console.log('ngOnInit');
-    }
-
-    menuClicked(ai: ActionMenuItem): void {
-
-    }
-
-    isAllSelected(): boolean {
-      if (!this.dataSource) { return false; }
-      if (this.selection.isEmpty()) { return false; }
-      return false;
-      // if (this.filter.nativeElement.value) {
-        // return this.selection.selected.length === this.dataSource.renderedData.length;
-      // } else {
-      //   return this.selection.selected.length === this.exampleDatabase.data.length;
-      // }
-    }
-
-    masterToggle() {
-      if (!this.dataSource) { return; }
-
-      if (this.isAllSelected()) {
-        this.selection.clear();
-      // } else if (this.filter.nativeElement.value) {
-      //   this.dataSource.renderedData.forEach(data => this.selection.select(data.id));
-      } else {
-        // this.exampleDatabase.data.forEach(data => this.selection.select(data.id));
-        this.dataSource.renderedData.forEach(data => this.selection.select(data.id as string));
-      }
-    }
+  get menuItems(): ActionMenuItem[] {
+    return [ActionMenuItem.getDeleteItem(), ActionMenuItem.getEditItem()];
   }
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('filter') filter: ElementRef;
 
+  constructor(private _manufactoryService: ManufacturerService) {}
 
-  // /** Constants used to fill up our data base. */
-  // const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
-  //   'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
-  // const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
-  //   'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
-  //   'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
+  ngOnInit() {
+    this.dataSource = this._manufactoryService
+      .getDatasource()
+      .initDatasource(this.paginator, this.sort);
+    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.dataSource) {
+          return;
+        }
+        this.dataSource.addFilter({fname: 'name', value: this.filter.nativeElement.value});
+      });
+  }
 
-  // export interface UserData {
-  //   id: string;
-  //   name: string;
-  //   progress: string;
-  //   color: string;
-  // }
+  menuClicked(ai: ActionMenuItem): void {}
 
-  // /** An example database that the data source uses to retrieve data for the table. */
-  // export class ExampleDatabase {
-  //   /** Stream that emits whenever the data has been modified. */
-  //   dataChange: BehaviorSubject<UserData[]> = new BehaviorSubject<UserData[]>([]);
-  //   get data(): UserData[] { return this.dataChange.value; }
+  isAllSelected(): boolean {
+    if (!this.dataSource) {
+      return false;
+    }
+    if (this.selection.isEmpty()) {
+      return false;
+    } else {
+      return true;
+    }
+    // if (this.filter.nativeElement.value) {
+    // return this.selection.selected.length === this.dataSource.renderedData.length;
+    // } else {
+    //   return this.selection.selected.length === this.exampleDatabase.data.length;
+    // }
+  }
 
-  //   constructor() {
-  //     // Fill up the database with 100 users.
-  //     for (let i = 0; i < 100; i++) { this.addUser(); }
-  //   }
+  masterToggle() {
+    if (!this.dataSource) {
+      return;
+    }
 
-  //   /** Adds a new user to the database. */
-  //   addUser() {
-  //     const copiedData = this.data.slice();
-  //     copiedData.push(this.createNewUser());
-  //     this.dataChange.next(copiedData);
-  //   }
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      // } else if (this.filter.nativeElement.value) {
+      //   this.dataSource.renderedData.forEach(data => this.selection.select(data.id));
+    } else {
+      // this.exampleDatabase.data.forEach(data => this.selection.select(data.id));
+      this.dataSource.renderedData.forEach(data =>
+        this.selection.select(data.id as string)
+      );
+    }
+  }
+}
 
-  //   /** Builds and returns a new User. */
-  //   private createNewUser() {
-  //     const name =
-  //         NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-  //         NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+// /** Constants used to fill up our data base. */
+// const COLORS = ['maroon', 'red', 'orange', 'yellow', 'olive', 'green', 'purple',
+//   'fuchsia', 'lime', 'teal', 'aqua', 'blue', 'navy', 'black', 'gray'];
+// const NAMES = ['Maia', 'Asher', 'Olivia', 'Atticus', 'Amelia', 'Jack',
+//   'Charlotte', 'Theodore', 'Isla', 'Oliver', 'Isabella', 'Jasper',
+//   'Cora', 'Levi', 'Violet', 'Arthur', 'Mia', 'Thomas', 'Elizabeth'];
 
-  //     return {
-  //       id: (this.data.length + 1).toString(),
-  //       name: name,
-  //       progress: Math.round(Math.random() * 100).toString(),
-  //       color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
-  //     };
-  //   }
-  // }
+// export interface UserData {
+//   id: string;
+//   name: string;
+//   progress: string;
+//   color: string;
+// }
 
-  // /**
-  //  * Data source to provide what data should be rendered in the table. Note that the data source
-  //  * can retrieve its data in any way. In this case, the data source is provided a reference
-  //  * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
-  //  * the underlying data. Instead, it only needs to take the data and send the table exactly what
-  //  * should be rendered.
-  //  */
-  // export class ExampleDataSource extends DataSource<any> {
-  //   _filterChange = new BehaviorSubject('');
-  //   get filter(): string { return this._filterChange.value; }
-  //   set filter(filter: string) { this._filterChange.next(filter); }
+// /** An example database that the data source uses to retrieve data for the table. */
+// export class ExampleDatabase {
+//   /** Stream that emits whenever the data has been modified. */
+//   dataChange: BehaviorSubject<UserData[]> = new BehaviorSubject<UserData[]>([]);
+//   get data(): UserData[] { return this.dataChange.value; }
 
-  //   filteredData: UserData[] = [];
-  //   renderedData: UserData[] = [];
+//   constructor() {
+//     // Fill up the database with 100 users.
+//     for (let i = 0; i < 100; i++) { this.addUser(); }
+//   }
 
-  //   constructor(private _exampleDatabase: ExampleDatabase,
-  //               private _paginator: MatPaginator,
-  //               private _sort: MatSort) {
-  //     super();
+//   /** Adds a new user to the database. */
+//   addUser() {
+//     const copiedData = this.data.slice();
+//     copiedData.push(this.createNewUser());
+//     this.dataChange.next(copiedData);
+//   }
 
-  //     // Reset to the first page when the user changes the filter.
-  //     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
-  //   }
+//   /** Builds and returns a new User. */
+//   private createNewUser() {
+//     const name =
+//         NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+//         NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
-  //   /** Connect function called by the table to retrieve one stream containing the data to render. */
-  //   connect(): Observable<UserData[]> {
-  //     // Listen for any changes in the base data, sorting, filtering, or pagination
-  //     const displayDataChanges = [
-  //       this._exampleDatabase.dataChange,
-  //       this._sort.sortChange,
-  //       this._filterChange,
-  //       this._paginator.page,
-  //     ];
+//     return {
+//       id: (this.data.length + 1).toString(),
+//       name: name,
+//       progress: Math.round(Math.random() * 100).toString(),
+//       color: COLORS[Math.round(Math.random() * (COLORS.length - 1))]
+//     };
+//   }
+// }
 
-  //     return Observable.merge(...displayDataChanges).map(() => {
-  //       // Filter data
-  //       this.filteredData = this._exampleDatabase.data.slice().filter((item: UserData) => {
-  //         let searchStr = (item.name + item.color).toLowerCase();
-  //         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
-  //       });
+// /**
+//  * Data source to provide what data should be rendered in the table. Note that the data source
+//  * can retrieve its data in any way. In this case, the data source is provided a reference
+//  * to a common data base, ExampleDatabase. It is not the data source's responsibility to manage
+//  * the underlying data. Instead, it only needs to take the data and send the table exactly what
+//  * should be rendered.
+//  */
+// export class ExampleDataSource extends DataSource<any> {
+//   _filterChange = new BehaviorSubject('');
+//   get filter(): string { return this._filterChange.value; }
+//   set filter(filter: string) { this._filterChange.next(filter); }
 
-  //       // Sort filtered data
-  //       const sortedData = this.sortData(this.filteredData.slice());
+//   filteredData: UserData[] = [];
+//   renderedData: UserData[] = [];
 
-  //       // Grab the page's slice of the filtered sorted data.
-  //       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-  //       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-  //       return this.renderedData;
-  //     });
-  //   }
+//   constructor(private _exampleDatabase: ExampleDatabase,
+//               private _paginator: MatPaginator,
+//               private _sort: MatSort) {
+//     super();
 
-  //   disconnect() {}
+//     // Reset to the first page when the user changes the filter.
+//     this._filterChange.subscribe(() => this._paginator.pageIndex = 0);
+//   }
 
-  //   /** Returns a sorted copy of the database data. */
-  //   sortData(data: UserData[]): UserData[] {
-  //     if (!this._sort.active || this._sort.direction === '') { return data; }
+//   /** Connect function called by the table to retrieve one stream containing the data to render. */
+//   connect(): Observable<UserData[]> {
+//     // Listen for any changes in the base data, sorting, filtering, or pagination
+//     const displayDataChanges = [
+//       this._exampleDatabase.dataChange,
+//       this._sort.sortChange,
+//       this._filterChange,
+//       this._paginator.page,
+//     ];
 
-  //     return data.sort((a, b) => {
-  //       let propertyA: number|string = '';
-  //       let propertyB: number|string = '';
+//     return Observable.merge(...displayDataChanges).map(() => {
+//       // Filter data
+//       this.filteredData = this._exampleDatabase.data.slice().filter((item: UserData) => {
+//         let searchStr = (item.name + item.color).toLowerCase();
+//         return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
+//       });
 
-  //       switch (this._sort.active) {
-  //         case 'userId': [propertyA, propertyB] = [a.id, b.id]; break;
-  //         case 'userName': [propertyA, propertyB] = [a.name, b.name]; break;
-  //         case 'progress': [propertyA, propertyB] = [a.progress, b.progress]; break;
-  //         case 'color': [propertyA, propertyB] = [a.color, b.color]; break;
-  //       }
+//       // Sort filtered data
+//       const sortedData = this.sortData(this.filteredData.slice());
 
-  //       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
-  //       let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+//       // Grab the page's slice of the filtered sorted data.
+//       const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+//       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+//       return this.renderedData;
+//     });
+//   }
 
-  //       return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
-  //     });
-  //   }
-  // }
+//   disconnect() {}
+
+//   /** Returns a sorted copy of the database data. */
+//   sortData(data: UserData[]): UserData[] {
+//     if (!this._sort.active || this._sort.direction === '') { return data; }
+
+//     return data.sort((a, b) => {
+//       let propertyA: number|string = '';
+//       let propertyB: number|string = '';
+
+//       switch (this._sort.active) {
+//         case 'userId': [propertyA, propertyB] = [a.id, b.id]; break;
+//         case 'userName': [propertyA, propertyB] = [a.name, b.name]; break;
+//         case 'progress': [propertyA, propertyB] = [a.progress, b.progress]; break;
+//         case 'color': [propertyA, propertyB] = [a.color, b.color]; break;
+//       }
+
+//       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
+//       let valueB = isNaN(+propertyB) ? propertyB : +propertyB;
+
+//       return (valueA < valueB ? -1 : 1) * (this._sort.direction === 'asc' ? 1 : -1);
+//     });
+//   }
+// }

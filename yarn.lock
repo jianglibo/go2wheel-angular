@@ -3063,8 +3063,8 @@ jasminewd2@^2.1.0:
   resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
 
 jlbfields@^1.0.0:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.5.tgz#3174857d65b656bab3b4a9490ac4a2e4dbb56b98"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.7.tgz#5472654ba638a36bf297deffec6553fdc6672a2f"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.0"
@@ -3131,8 +3131,8 @@ json5@^0.5.0, json5@^0.5.1:
   resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
 
 jsonapi4angular@^1.0.0:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/jsonapi4angular/-/jsonapi4angular-1.0.6.tgz#bbd65d79d7e23d67817dbe85408272957fd76d52"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/jsonapi4angular/-/jsonapi4angular-1.0.7.tgz#53ad9b1029eb1c4acd9ed2a7f2ad7d2aad299048"
 
 jsonfile@^4.0.0:
   version "4.0.0"
