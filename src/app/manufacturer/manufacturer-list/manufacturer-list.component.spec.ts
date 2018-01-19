@@ -1,18 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManufacturerListComponent } from './manufacturer-list.component';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import {
-  MatFormFieldModule,
-  MatInputModule,
-  MatTableModule,
-  MatPaginatorModule,
-  MatIconModule,
-  MatListModule,
-  MatCheckboxModule,
-  MatSortModule
-} from '@angular/material';
 
 import { HttpDatastoreService } from '../../services/http-datastore.service';
 import {
@@ -29,6 +17,7 @@ import {
   ManufacturerAttributes,
   MANUFACTURERS_BODY
 } from 'data-shape-ng';
+
 import {
   HttpClientTestingModule,
   HttpTestingController

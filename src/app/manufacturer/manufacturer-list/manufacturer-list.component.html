@@ -1,13 +1,22 @@
-<div class="example-header" [style.display]="selection.isEmpty() ? '' : 'none'">
+<!-- <div class="example-header" [style.display]="selection.isEmpty() ? '' : 'none'">
+  <mat-form-field floatPlaceholder="never">
+    <input matInput #filter placeholder="Filter users">
+  </mat-form-field>
+</div> -->
+
+<div class="example-header">
   <mat-form-field floatPlaceholder="never">
     <input matInput #filter placeholder="Filter users">
   </mat-form-field>
 </div>
 
-<div class="example-header example-selection-header" *ngIf="!selection.isEmpty()">
+<!-- <div class="example-header example-selection-header" *ngIf="!selection.isEmpty()">
   {{selection.selected.length}}
   {{selection.selected.length == 1 ? 'user' : 'users'}}
   selected
+</div> -->
+<div class="action-menu-container">
+  <span>Hello</span>
 </div>
 
 <div>
@@ -15,7 +24,6 @@
 </div>
 
 <div class="example-container mat-elevation-z8">
-
   <mat-table #table [dataSource]="dataSource" matSort>
 
     <!--- Note that these columns can be defined in any order.

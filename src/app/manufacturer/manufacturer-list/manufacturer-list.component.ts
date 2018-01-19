@@ -61,7 +61,7 @@ export class ManufacturerListComponent implements OnInit {
     if (this.selection.isEmpty()) {
       return false;
     } else {
-      return true;
+       return this.selection.selected.length === this.dataSource.renderedData.length;
     }
     // if (this.filter.nativeElement.value) {
     // return this.selection.selected.length === this.dataSource.renderedData.length;
