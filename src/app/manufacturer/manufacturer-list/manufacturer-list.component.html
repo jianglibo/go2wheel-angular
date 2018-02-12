@@ -10,14 +10,13 @@
   </mat-form-field>
 </div>
 
-<!-- <div class="example-header example-selection-header" *ngIf="!selection.isEmpty()">
+<!--
+ <div class="example-header example-selection-header" *ngIf="!selection.isEmpty()">
   {{selection.selected.length}}
   {{selection.selected.length == 1 ? 'user' : 'users'}}
   selected
-</div> -->
-<div class="action-menu-container">
-  <span>Hello</span>
 </div>
+-->
 
 <div>
   <app-action-menu [selectedNumber]="selection.selected.length" maxButtons="6" [hideDisabled]="false" itemSize="24" [menuItems]="menuItems" (menuClicked)="menuClicked($event)"></app-action-menu>

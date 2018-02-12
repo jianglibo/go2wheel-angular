@@ -1,5 +1,5 @@
 Arguments: 
-  D:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js upgrade jsonapi4angular
+  D:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
   E:\jet12.0-eval-x86\bin;C:\Program Files\Microsoft MPI\Bin\;C:\ProgramData\Oracle\Java\javapath;F:\Tcl\bin;D:\Python27\;d:\Program Files\ImageMagick-6.8.9-Q16;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;d:\Program Files\ImageMagick-6.8.5-Q16;d:\Program Files (x86)\ImageMagick-6.8.5-Q16;D:\Perl64\site\bin;D:\Perl64\bin;D:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;D:\apache-maven-3.3.3\bin;D:\apache-ant-1.9.4\bin;c:\myexec;d:\Program Files (x86)\BaseX\bin;d:\Program Files (x86)\Groovy\Groovy-2.1.7\bin;d:\Program Files (x86)\GNU\GnuPG\pub;E:\apps\phantomjs-1.9.7-windows;E:\Program Files (x86)\Mozilla Firefox;C:\Program Files (x86)\Windows Live\Shared;E:\phantomjs-2.0.0-windows\bin;E:\Leksah\bin\;E:\apktools;C:\Users\admin\AppData\Roaming\cabal\bin;D:\dex2jar-2.0;F:\Program Files (x86)\Android\android-sdk\platform-tools;F:\Program Files (x86)\Android\android-sdk\tools;D:\Program Files\nodejs;C:\Users\admin\AppData\Roaming\npm;D:\Program Files (x86)\scala\bin;D:\Program Files (x86)\sbt\bin;C:\Users\admin\bin;E:\Program Files (x86)\QuickTime\QTSystem\;E:\HashiCorp\Vagrant\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\dotnet\;D:\Program Files\Git\cmd;C:\ProgramData\chocolatey\bin;D:\gradle-3.5\bin;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Yarn\bin;D:\Program Files\nodejs\;C:\Program Files\Microsoft MPI\Bin\;C:\ProgramData\Oracle\Java\javapath;F:\Tcl\bin;D:\Python27\;d:\Program Files\ImageMagick-6.8.9-Q16;C:\Program Files\Common Files\Microsoft Shared\Windows Live;C:\Program Files (x86)\Common Files\Microsoft Shared\Windows Live;d:\Program Files\ImageMagick-6.8.5-Q16;d:\Program Files (x86)\ImageMagick-6.8.5-Q16;D:\Perl64\site\bin;D:\Perl64\bin;D:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;D:\apache-maven-3.3.3\bin;D:\apache-ant-1.9.4\bin;c:\myexec;d:\Program Files (x86)\BaseX\bin;d:\Program Files (x86)\Groovy\Groovy-2.1.7\bin;d:\Prog;D:\gradle-3.5\bin;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\admin\AppData\Local\Yarn\bin;C:\Users\admin\AppData\Roaming\npm;
@@ -26,6 +26,9 @@ npm manifest:
       "lint": "ng lint",
       "e2e": "ng e2e"
     },
+    "prettier": {
+      "singleQuote": true
+    },
     "private": true,
     "dependencies": {
       "@angular/animations": "^5.0.0",
@@ -40,9 +43,9 @@ npm manifest:
       "@angular/platform-browser-dynamic": "^5.0.0",
       "@angular/router": "^5.0.0",
       "core-js": "^2.4.1",
-      "data-shape": "^1.0.0",
+      "data-shape-ng": "1.0.6",
       "jlbfields": "^1.0.0",
-      "jsonapi4angular": "^1.0.0",
+      "jsonapi4angular": "1.0.9",
       "rxjs": "^5.5.2",
       "zone.js": "^0.8.14"
     },
@@ -1496,9 +1499,12 @@ Lockfile:
     dependencies:
       assert-plus "^1.0.0"
   
-  data-shape@^1.0.0:
-    version "1.0.8"
-    resolved "https://registry.yarnpkg.com/data-shape/-/data-shape-1.0.8.tgz#77c80118ed2ba91c90bfacd2ed44c9cba4fe1de1"
+  data-shape-ng@^1.0.0:
+    version "1.0.5"
+    resolved "https://registry.yarnpkg.com/data-shape-ng/-/data-shape-ng-1.0.5.tgz#6bd06b410c502b52a30e9fa9e9ccc220672695ca"
+    dependencies:
+      reflect-metadata "^0.1.10"
+      rxjs "^5.5.2"
   
   date-now@^0.1.4:
     version "0.1.4"
@@ -1738,8 +1744,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.7.tgz#cc872c168880ae3c7189762fd5ffc00896c9518a"
   
   electron-to-chromium@^1.2.7:
-    version "1.3.28"
-    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.28.tgz#8dd4e6458086644e9f9f0a1cf32e2a1f9dffd9ee"
+    version "1.3.29"
+    resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.29.tgz#7a58236b95468c3e7660091348522d65d7736b36"
   
   elliptic@^6.0.0:
     version "6.4.0"
@@ -2912,8 +2918,8 @@ Lockfile:
       is-extglob "^2.1.1"
   
   is-my-json-valid@^2.12.4:
-    version "2.16.1"
-    resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.16.1.tgz#5a846777e2c2620d1e69104e5d3a03b1f6088f11"
+    version "2.17.1"
+    resolved "https://registry.yarnpkg.com/is-my-json-valid/-/is-my-json-valid-2.17.1.tgz#3da98914a70a22f0a8563ef1511a246c6fc55471"
     dependencies:
       generate-function "^2.0.0"
       generate-object-property "^1.1.0"
@@ -3135,8 +3141,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/jasminewd2/-/jasminewd2-2.2.0.tgz#e37cf0b17f199cce23bea71b2039395246b4ec4e"
   
   jlbfields@^1.0.0:
-    version "1.0.2"
-    resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.2.tgz#428becccc14af711dd2d049dc62390202104f6e4"
+    version "1.0.7"
+    resolved "https://registry.yarnpkg.com/jlbfields/-/jlbfields-1.0.7.tgz#5472654ba638a36bf297deffec6553fdc6672a2f"
   
   js-base64@^2.1.8, js-base64@^2.1.9:
     version "2.4.0"
@@ -3203,8 +3209,8 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/json5/-/json5-0.5.1.tgz#1eade7acc012034ad84e2396767ead9fa5495821"
   
   jsonapi4angular@^1.0.0:
-    version "1.0.3"
-    resolved "https://registry.yarnpkg.com/jsonapi4angular/-/jsonapi4angular-1.0.3.tgz#604a518dd002d49387f992e35af0ea047249335d"
+    version "1.0.8"
+    resolved "https://registry.yarnpkg.com/jsonapi4angular/-/jsonapi4angular-1.0.8.tgz#879abee4ca313968436bab1bad67b98f655fe9ea"
   
   jsonfile@^4.0.0:
     version "4.0.0"
@@ -4760,6 +4766,10 @@ Lockfile:
     dependencies:
       balanced-match "^0.4.2"
   
+  reflect-metadata@^0.1.10:
+    version "0.1.12"
+    resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.12.tgz#311bf0c6b63cd782f228a81abe146a2bfa9c56f2"
+  
   reflect-metadata@^0.1.2:
     version "0.1.10"
     resolved "https://registry.yarnpkg.com/reflect-metadata/-/reflect-metadata-0.1.10.tgz#b4f83704416acad89988c9b15635d47e03b9344a"
@@ -6309,7 +6319,7 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.18.tgz#8cecb3977fcd1b3090562ff4570e2847e752b48d"
 
 Trace: 
-  Error: connect ETIMEDOUT 104.16.62.173:443
+  Error: connect ECONNABORTED 104.16.61.173:443
       at Object._errnoException (util.js:1031:13)
       at _exceptionWithHostPort (util.js:1052:20)
       at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1195:14)

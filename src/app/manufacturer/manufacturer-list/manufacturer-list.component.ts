@@ -15,6 +15,7 @@ import { DataStore } from 'data-shape-ng';
 import { ManufacturerService } from '../manufacturer.service';
 import { ActionMenuItem } from 'jlbfields/index';
 import { NameValueComponent } from 'jlbfields';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-manufacturer-list',
@@ -28,19 +29,30 @@ export class ManufacturerListComponent implements OnInit {
   dataSource: ManufacturerDatasource | null;
 
   get menuItems(): ActionMenuItem[] {
-    return [ActionMenuItem.getDeleteItem(), ActionMenuItem.getEditItem()];
+    return [
+      ActionMenuItem.getDeleteItem(),
+      ActionMenuItem.getEditItem(),
+      ActionMenuItem.getCreateItem()
+    ];
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('filter') filter: ElementRef;
 
-  constructor(private _manufactoryService: ManufacturerService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private _manufactoryService: ManufacturerService
+  ) {}
 
   ngOnInit() {
     this.dataSource = this._manufactoryService
       .getDatasource()
       .initDatasource(this.paginator, this.sort);
+    this.dataSource.pageIndexChange.subscribe(() => {
+      this.selection.clear();
+    });
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
@@ -48,11 +60,28 @@ export class ManufacturerListComponent implements OnInit {
         if (!this.dataSource) {
           return;
         }
-        this.dataSource.addFilter({fname: 'name', value: this.filter.nativeElement.value});
+        this.dataSource.addFilter({
+          fname: 'name',
+          value: this.filter.nativeElement.value
+        });
       });
   }
 
-  menuClicked(ai: ActionMenuItem): void {}
+  menuClicked(ai: ActionMenuItem): void {
+    console.log(ai);
+    switch (ai.id) {
+      case 'create':
+        this.router.navigate(['/manufacturers/create']);
+        break;
+      case 'edit':
+        this.router.navigate(['/manufacturers/edit', this.selection.selected[0]]);
+        break;
+      case 'delete':
+        // this.dataSource.
+      default:
+        break;
+    }
+  }
 
   isAllSelected(): boolean {
     if (!this.dataSource) {
@@ -61,7 +90,9 @@ export class ManufacturerListComponent implements OnInit {
     if (this.selection.isEmpty()) {
       return false;
     } else {
-       return this.selection.selected.length === this.dataSource.renderedData.length;
+      return (
+        this.selection.selected.length === this.dataSource.renderedData.length
+      );
     }
     // if (this.filter.nativeElement.value) {
     // return this.selection.selected.length === this.dataSource.renderedData.length;
